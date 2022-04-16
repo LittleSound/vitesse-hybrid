@@ -2,7 +2,7 @@
   "private": true,
   "packageManager": "pnpm@6.32.3",
   "scripts": {
-    "dev": "vite-ssr --port 3333 --open",
+    "dev": "ts-node server/dev",
     "dev:spa": "vite --port 3333 --open",
     "build": "vite-ssr build",
     "preview": "ts-node server ./dist 8080",
