@@ -11,3 +11,4 @@ intro:
   hi: Hi, {name}!
   whats-your-name: Tên bạn là gì?
 not-found: Không tìm thấy
+this-text-is-only-visible-to-the-client: Văn bản này chỉ hiển thị cho khách hàng

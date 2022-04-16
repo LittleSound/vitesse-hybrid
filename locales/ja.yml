@@ -11,3 +11,4 @@ intro:
   hi: こんにちは、{name}!
   whats-your-name: 君の名は。
 not-found: 見つかりませんでした
+this-text-is-only-visible-to-the-client: このテキストはクライアントにのみ表示されます

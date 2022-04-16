@@ -6,9 +6,10 @@ button:
   toggle_dark: Karanlık modu değiştir
   toggle_langs: Dilleri değiştir
 intro:
+  aka: Ayrıca şöyle bilinir
   desc: Görüşlü Vite Başlangıç Şablonu
   dynamic-route: Dinamik rota demosu
   hi: Merhaba, {name}!
-  aka: Ayrıca şöyle bilinir
   whats-your-name: Adınız nedir?
 not-found: Bulunamadı
+this-text-is-only-visible-to-the-client: Bu metin yalnızca müşteri tarafından görülebilir

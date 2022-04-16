@@ -11,3 +11,4 @@ intro:
   hi: Ciao, {name}!
   whats-your-name: Come ti chiami?
 not-found: Non trovato
+this-text-is-only-visible-to-the-client: Questo testo è visibile solo al cliente

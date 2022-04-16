@@ -2,7 +2,6 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
-import generateSitemap from 'vite-ssg-sitemap'
 import Layouts from 'vite-plugin-vue-layouts'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -13,6 +12,7 @@ import Inspect from 'vite-plugin-inspect'
 import Prism from 'markdown-it-prism'
 import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
+import viteSSR from 'vite-ssr/plugin.js'
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
 
@@ -24,6 +24,18 @@ export default defineConfig({
   },
 
   plugins: [
+    // https://github.com/frandiox/vite-ssr
+    viteSSR({
+      build: {
+        // Keep index.html as entry point in client build
+        keepIndexHtml: true,
+
+        serverOptions: {
+          publicDir: 'public',
+        },
+      },
+    }),
+
     Vue({
       include: [/\.vue$/, /\.md$/],
       reactivityTransform: true,
@@ -57,6 +69,14 @@ export default defineConfig({
       // allow auto import and register components used in markdown
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dts: 'src/components.d.ts',
+
+      // Custom import resolvers
+      resolvers: [
+        // auto import ClientOnly
+        componentName => componentName === 'ClientOnly'
+          ? { name: componentName, from: 'vite-ssr' }
+          : undefined,
+      ],
     }),
 
     // https://github.com/antfu/unocss
@@ -121,13 +141,6 @@ export default defineConfig({
     // Visit http://localhost:3333/__inspect/ to see the inspector
     Inspect(),
   ],
-
-  // https://github.com/antfu/vite-ssg
-  ssgOptions: {
-    script: 'async',
-    formatting: 'minify',
-    onFinished() { generateSitemap() },
-  },
 
   // https://github.com/vitest-dev/vitest
   test: {

@@ -11,3 +11,4 @@ intro:
   hi: 안녕, {name}!
   whats-your-name: 이름이 뭐예요?
 not-found: 찾을 수 없습니다
+this-text-is-only-visible-to-the-client: 이 텍스트는 클라이언트에게만 표시됩니다.

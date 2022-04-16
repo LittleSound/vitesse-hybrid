@@ -14,12 +14,17 @@ const messages = Object.fromEntries(
     }),
 )
 
-export const install: UserModule = ({ app }) => {
-  const i18n = createI18n({
-    legacy: false,
-    locale: 'en',
-    messages,
-  })
+const i18n = createI18n({
+  legacy: false,
+  locale: 'en',
+  messages,
+})
 
+export const install: UserModule = ({ app }) => {
   app.use(i18n)
+}
+
+/** 在 setup 外面获取 i18n 对象 */
+export function getI18n() {
+  return i18n?.global || undefined
 }

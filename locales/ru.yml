@@ -11,3 +11,4 @@ intro:
   hi: Привет, {name}!
   whats-your-name: Как тебя зовут?
 not-found: Не найден
+this-text-is-only-visible-to-the-client: Этот текст виден только клиенту
