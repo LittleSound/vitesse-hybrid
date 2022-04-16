@@ -19,8 +19,8 @@ const { t } = useI18n()
       <div i-carbon-campsite inline-block />
     </div>
     <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
+      <a rel="noreferrer" href="https://github.com/LittleSound/vitesse-hybrid" target="_blank">
+        Vitesse Hybrid
       </a>
     </p>
     <p>
