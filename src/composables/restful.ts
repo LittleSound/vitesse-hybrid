@@ -10,6 +10,7 @@ import type {
 import axios from 'axios'
 
 import { useContext } from 'vite-ssr'
+import type { Ref } from 'vue'
 import { getI18n } from '~/modules/i18n'
 
 export interface RESTfulOkResult<T = any> {
@@ -169,7 +170,7 @@ export async function useAsyncData<T>(key: string, handler: useAsyncDataHandler<
   }
 
   return {
-    data: data as T,
+    data: data as Ref<T>,
     reload: async() => {
       data.value = await handler()
 

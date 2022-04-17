@@ -27,6 +27,14 @@ const { t } = useI18n()
     <p>
       <em text-sm opacity-75>{{ t('intro.desc') }}</em>
     </p>
+    <Suspense>
+      <PageView />
+      <template #fallback>
+        <div op50 italic>
+          <span animate-pulse>Loading...</span>
+        </div>
+      </template>
+    </Suspense>
 
     <div py-4 />
 
