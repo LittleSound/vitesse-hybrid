@@ -1,3 +1,4 @@
+#!/usr/bin/env tsm
 /***
  * # 这是开发服务器。
  * 通过 `npx ts-node dev.ts` 启动。

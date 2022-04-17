@@ -1,3 +1,4 @@
+#!/usr/bin/env tsm
 /***
  * # 这是一个使用已构建项目的 Node 服务器。
  * 通过 `npx ts-node index.ts` 启动。

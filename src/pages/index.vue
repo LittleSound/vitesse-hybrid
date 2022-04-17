@@ -15,13 +15,10 @@ const { t } = useI18n()
 
 <template>
   <div>
-    <!-- <div text-4xl>
-      <div i-carbon-campsite inline-block />
-    </div> -->
-
     <div text-4xl w-12 mx-auto>
       <img src="/pwa-512x512.png" alt="logo" object-cover>
     </div>
+
     <p>
       <a rel="noreferrer" href="https://github.com/LittleSound/vitesse-hybrid" target="_blank">
         Vitesse Hybrid

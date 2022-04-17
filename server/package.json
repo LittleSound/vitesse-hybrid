@@ -4,6 +4,10 @@
   "description": "vite-ssr dist server",
   "main": "index.ts",
   "type": "module",
+  "bin": {
+    "server": "index.ts",
+    "server-dev": "dev.ts"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --outDir dist",
