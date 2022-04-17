@@ -1,12 +1,12 @@
 {
-  "name": "server",
+  "name": "hybrider",
   "version": "1.0.0",
   "description": "vite-ssr dist server",
   "main": "index.ts",
   "type": "module",
   "bin": {
-    "server": "index.ts",
-    "server-dev": "dev.ts"
+    "hybrider-prod": "index.ts",
+    "hybrider": "dev.ts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
