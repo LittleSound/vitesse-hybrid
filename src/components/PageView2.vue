@@ -4,14 +4,6 @@ import { useFetch } from '~/composables/restful'
 
 const { url } = useContext()
 
-// const { data } = await useAsyncData<PageView>(
-//   'pageview',
-//   async() => {
-//     const { data } = await axios.get<PageView>(`${url.origin}/api/pageview`)
-//     return data
-//   },
-// )
-
 const { data, reload, pending, error } = useFetch(`${url.origin}/api/pageview`)
 
 </script>

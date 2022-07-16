@@ -35,7 +35,7 @@ const { t } = useI18n()
         </div>
       </template>
     </Suspense>
-    <PageView2 />
+    <!-- <PageView2 /> -->
 
     <div py-4 />
 

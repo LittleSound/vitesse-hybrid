@@ -5,16 +5,21 @@
  */
 
 import { URL, fileURLToPath, pathToFileURL } from 'url'
-import { dirname } from 'path'
+import { dirname, resolve } from 'path'
 
 import { readFile } from 'fs/promises'
 import type { Express } from 'express'
 import express from 'express'
+import { initApi } from './autoMount'
 
 const example = process.argv[2]
 
 const port = process.argv[3] || 8080
 
+let serverPath = process.argv[4]
+
+// @ts-expect-error __dirname
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const root = fileURLToPath(new URL('..', import.meta.url).toString()).slice(0, -1)
@@ -22,6 +27,12 @@ const root = fileURLToPath(new URL('..', import.meta.url).toString()).slice(0, -
 const dist = example
   ? fileURLToPath(new URL(example, `${pathToFileURL(process.cwd()).toString()}/`).toString())
   : `${root}/dist`
+
+
+// 解析 API 文件的路径
+serverPath = serverPath
+? resolve(process.cwd(), serverPath)
+: `${root}/server`
 
 startServer()
 async function startServer() {
@@ -42,7 +53,7 @@ async function startServer() {
   await initAsset(server)
 
   // Init API
-  await initApi(server)
+  await initApi(server, serverPath)
 
   // Everything else is treated as a "rendering request"
   server.get('*', async(request, response) => {
@@ -91,35 +102,4 @@ async function readJSON(path: string) {
 
 function useDefault(obj: any) {
   return typeof obj === 'function' ? obj : useDefault(obj.default)
-}
-
-async function initApi(server: Express) {
-  const pageview = await import(`${__dirname}/api/pageview.js`)
-
-  server.get('/api/pageview', async(request, response) => {
-    try {
-      const res = dataToString(pageview.default())
-      response.writeHead(200)
-      response.end(res)
-    }
-    catch (err) {
-      response.status(500)
-      console.error(err)
-      if (err instanceof Error) {
-        response.end(err.message)
-        return
-      }
-      response.end(String(err))
-    }
-  })
-}
-
-function dataToString(data: any) {
-  if (typeof data === 'string')
-    return data
-  if (typeof data === 'number' || typeof data === 'boolean')
-    return String(data)
-  if (typeof data === 'object')
-    return JSON.stringify(data)
-  throw new Error('dataToString: unconvertible type')
 }
