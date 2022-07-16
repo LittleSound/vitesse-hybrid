@@ -35,6 +35,7 @@ export default ViteSSR(
     base: () => import.meta.env.BASE_URL,
   },
   (ctx) => {
-    Object.values(import.meta.globEager('./modules/*.ts')).map(i => i.install?.(ctx))
+    const results = Object.values(import.meta.globEager('./modules/*.ts')).map(i => i.install?.(ctx))
+    return results.reduce((total, item) => ({ ...total, ...item }), {})
   },
 )

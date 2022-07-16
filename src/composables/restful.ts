@@ -179,3 +179,51 @@ export async function useAsyncData<T>(key: string, handler: useAsyncDataHandler<
     },
   }
 }
+
+export interface FPromise<T = Response, E = Error> extends Promise<{
+  data: Ref<T | undefined>
+  error: Ref<E | undefined>
+  pending: Ref<boolean>
+  reload: () => Promise<void>
+}> {
+  data: Ref<T | undefined>
+  error: Ref<E | undefined>
+  pending: Ref<boolean>
+  reload: () => Promise<void>
+}
+
+export function useFetch(input: string, init?: RequestInit): FPromise<string> {
+  const data = ref<string>()
+  const error = ref<Error>()
+  const pending = ref(true)
+
+  const getData: (() => FPromise<string>) = (async() => {
+    pending.value = true
+    const resp = await fetch(input, init)
+    if (resp.status === 200)
+      data.value = await resp.text()
+    else
+      error.value = new Error(resp.statusText)
+
+    pending.value = false
+    return {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      reload,
+      data,
+      error,
+      pending,
+    }
+  }) as any
+
+  const reload = async() => {
+    await getData()
+  }
+
+  const promise = getData()
+
+  promise.data = data
+  promise.error = error
+  promise.pending = pending
+  promise.reload = reload
+  return promise
+}
